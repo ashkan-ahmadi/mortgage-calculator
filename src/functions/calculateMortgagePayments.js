@@ -1,8 +1,9 @@
+import { formatToTwoDecimals } from './_functions.js'
+
 export const calculateMortgagePayments = values => {
   const { LOAN_AMOUNT, ANNUAL_INTEREST_RATE, PAYMENTS_PER_YEAR, TOTAL_PERIODS, PMT } = values
 
-  // TODO: setting it to 0 for now
-  // the formular will need to change later on
+  // setting it to 0 for now. the formula will need to change later on
   const extraPayment = 0
 
   // will push the objects in here
@@ -20,11 +21,11 @@ export const calculateMortgagePayments = values => {
     principal = PMT - interest
 
     mortgage.push({
-      period: i,
-      PMT: PMT,
-      interest: interest,
-      principal: principal,
-      loan: loan,
+      Period: formatToTwoDecimals(i),
+      PMT: formatToTwoDecimals(PMT),
+      Interest: formatToTwoDecimals(interest),
+      Principal: formatToTwoDecimals(principal),
+      Loan: formatToTwoDecimals(loan),
     })
   }
 
