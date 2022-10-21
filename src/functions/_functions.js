@@ -14,6 +14,10 @@ export const formatToTwoDecimals = number => {
   return Number(Math.round(number + 'e2') + 'e-2')
 }
 
+export const formatNumber = (number, locale = 'en-us') => {
+  return Intl.NumberFormat(locale).format(number)
+}
+
 export const scrollToElementById = (id, options = {}) => {
   //Finds y value of given object
   //https://stackoverflow.com/a/11986374
