@@ -1,6 +1,6 @@
-import { $ } from './functions/_functions'
-import { calculatePMT } from './functions/calculatePMT'
-import { calculateMortgagePayments } from './functions/calculateMortgagePayments'
+import { $, formatToTwoDecimals } from './functions/_functions.js'
+import { calculatePMT } from './functions/calculatePMT.js'
+import { calculateMortgagePayments } from './functions/calculateMortgagePayments.js'
 
 export const App = () => {
   // get the form
@@ -13,40 +13,45 @@ export const App = () => {
   const mortgageLengthElement = $('#mortgage-length')
   const interestRateElement = $('#interest-rate')
   const amountElement = $('#amount')
-  const monthlyPaymentsElement = $('#monthly-overpayments')
   const paymentsPerYearElement = $('#paymentsPerYear')
-  const downPaymentElement = $('#down-payment')
+  // const monthlyPaymentsElement = $('#monthly-overpayments')
+  // const downPaymentElement = $('#down-payment')
 
   form.addEventListener('submit', e => {
     // stop the page from refreshing
     e.preventDefault()
 
     // getting the user input values
-    const mortgageLength = mortgageLengthElement.valueAsNumber
-    const interestRate = interestRateElement.valueAsNumber / 100
-    const amount = amountElement.valueAsNumber
-    // const paymentsPerYear = Number(paymentsPerYearElement.value);
-    const paymentsPerYear = 12
+    const YEARS = mortgageLengthElement.valueAsNumber
+    const ANNUAL_INTEREST_RATE = interestRateElement.valueAsNumber / 100
+    const LOAN_AMOUNT = amountElement.valueAsNumber
+    const PAYMENTS_PER_YEAR = Number(paymentsPerYearElement.value)
+    const TOTAL_PERIODS = YEARS * PAYMENTS_PER_YEAR
 
     // It has || 0 so that if the field is left empty, it defaults to 0
     const monthlyPayments = monthlyPaymentsElement.valueAsNumber || 0
     const downPayment = downPaymentElement.valueAsNumber || 0
 
     // calculate the PMT (how much to pay per interval)
-    const PMT = calculatePMT({
-      totalLoan: amount,
-      annualInterestRate: interestRate,
-      totalPeriodYears: mortgageLength,
-      periodPerYear: paymentsPerYear,
-    })
+    const PMT = formatToTwoDecimals(
+      calculatePMT({
+        totalLoan: LOAN_AMOUNT,
+        annualInterestRate: ANNUAL_INTEREST_RATE,
+        totalPeriodYears: YEARS,
+        periodPerYear: PAYMENTS_PER_YEAR,
+      })
+    )
 
+    // calculate the mortgage payments per period
     const MORTGAGE_PAYMENTS = calculateMortgagePayments({
-      PMT: PMT,
-      PERIODS: paymentsPerYear,
-      ANNUAL_RATE: interestRate,
-      PRINCIPAL_LOAN: amount,
+      LOAN_AMOUNT,
+      ANNUAL_INTEREST_RATE,
+      YEARS,
+      PAYMENTS_PER_YEAR,
+      TOTAL_PERIODS,
+      PMT,
     })
 
-    console.log(PMT)
+    // console.table(MORTGAGE_PAYMENTS)
   }) // form.submit
 } // App
