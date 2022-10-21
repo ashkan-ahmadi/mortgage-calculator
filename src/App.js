@@ -1,4 +1,4 @@
-import { $, formatToTwoDecimals } from './functions/_functions.js'
+import { $, formatToTwoDecimals, scrollToElementById } from './functions/_functions.js'
 import { calculatePMT } from './functions/calculatePMT.js'
 import { calculateMortgagePayments } from './functions/calculateMortgagePayments.js'
 
@@ -52,6 +52,8 @@ export const App = () => {
       PMT,
     })
 
-    console.table(MORTGAGE_PAYMENTS)
+    // console.table(MORTGAGE_PAYMENTS)
+
+    scrollToElementById('resultTitle')
   }) // form.submit
 } // App
