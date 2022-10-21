@@ -3,9 +3,9 @@ export const calculatePMT = values => {
    * Calculates the monthly payment amount of a loan
    *
    * @source https://www.mymove.com/mortgage/mortgage-calculation/
-   * @param {number} LOAN_AMOUNT - The total amount of loan borrowed
-   * @param {number} TOTAL_PERIODS - The total number of periods/payments
-   * @param {number} INTEREST_RATE_PER_PERIOD - The interest rate per period/payment
+   * @param {number} values.LOAN_AMOUNT - The total amount of loan borrowed
+   * @param {number} values.TOTAL_PERIODS - The total number of periods/payments
+   * @param {number} values.INTEREST_RATE_PER_PERIOD - The interest rate per period/payment
    * @return {number} amount to pay per period
    */
 
