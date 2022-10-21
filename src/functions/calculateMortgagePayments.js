@@ -21,7 +21,7 @@ export const calculateMortgagePayments = values => {
     principal = PMT - interest
 
     mortgage.push({
-      Period: formatToTwoDecimals(i),
+      Period: i,
       PMT: formatToTwoDecimals(PMT),
       Interest: formatToTwoDecimals(interest),
       Principal: formatToTwoDecimals(principal),
