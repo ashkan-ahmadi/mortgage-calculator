@@ -12,9 +12,6 @@ export const calculatePMT = values => {
 
   const { totalLoan, annualInterestRate, totalPeriodYears, periodPerYear } = values
 
-  // divide by 100 to get the true value (e.g. 5% = 0.05)
-  annualInterestRate = annualInterestRate / 100
-
   // how many payments to make
   const totalPeriods = totalPeriodYears * periodPerYear
 
