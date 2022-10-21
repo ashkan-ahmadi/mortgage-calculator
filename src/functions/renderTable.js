@@ -1,6 +1,8 @@
-import { formatNumber } from './_functions.js'
+import { $, formatNumber } from './_functions.js'
 
 export const renderTable = data => {
+  const resultSection = $('#resultSection')
+
   // clearing the data ready to be created again
   resultSection.innerHTML = ''
 
