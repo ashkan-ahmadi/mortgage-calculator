@@ -1,39 +1,32 @@
 export const calculateMortgagePayments = values => {
-  const { PMT, PERIODS, ANNUAL_RATE, PRINCIPAL_LOAN } = values
+  const { LOAN_AMOUNT, ANNUAL_INTEREST_RATE, PAYMENTS_PER_YEAR, TOTAL_PERIODS, PMT } = values
 
-  // setting default as 0. They will be calculated in the for loop
-  let interestPerPeriod = 0
-  let principalPerPeriod = 0
+  // TODO: setting it to 0 for now
+  // the formular will need to change later on
+  const extraPayment = 0
 
-  // default is the same but it changes for every period
-  let loanPerPeriod = PRINCIPAL_LOAN
-  let extraPayment = 0
+  // will push the objects in here
+  let mortgage = []
 
-  // we will push all the values into this object
-  let mortgagePayments = {
-    payments: [],
-    totals: {
-      totalPaymentOutOfPocket: Number((PMT * PERIODS).toFixed(2)),
-      totalInterest: Number((PMT * PERIODS - PRINCIPAL_LOAN).toFixed(2)),
-      PMT: PMT,
-    },
-  }
+  // starting values
+  let interest = 0
+  let principal = 0
+  let loan = LOAN_AMOUNT
 
-  // calculate the 3 different values here
-  for (let i = 1; i <= PERIODS; i++) {
-    loanPerPeriod = loanPerPeriod - principalPerPeriod - extraPayment
-    interestPerPeriod = (loanPerPeriod * ANNUAL_RATE) / PERIODS
-    principalPerPeriod = PMT - interestPerPeriod
+  // calculates the interest, interest and principal of every payment period
+  for (let i = 1; i <= TOTAL_PERIODS; i++) {
+    loan = loan - principal - extraPayment
+    interest = (loan * ANNUAL_INTEREST_RATE) / PAYMENTS_PER_YEAR
+    principal = PMT - interest
 
-    // push the numbers of every period into the mortgagePayments.payments array
-    mortgagePayments.payments.push({
+    mortgage.push({
       period: i,
       PMT: PMT,
-      interest: Number(interestPerPeriod.toFixed(2)),
-      principal: Math.abs(principalPerPeriod.toFixed(2)),
-      loan: Number(loanPerPeriod.toFixed(2)),
+      interest: interest,
+      principal: principal,
+      loan: loan,
     })
   }
 
-  return mortgagePayments
+  return mortgage
 }
