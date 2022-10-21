@@ -27,18 +27,18 @@ export const App = () => {
     const LOAN_AMOUNT = amountElement.valueAsNumber
     const PAYMENTS_PER_YEAR = Number(paymentsPerYearElement.value)
     const TOTAL_PERIODS = YEARS * PAYMENTS_PER_YEAR
+    const INTEREST_RATE_PER_PERIOD = ANNUAL_INTEREST_RATE / PAYMENTS_PER_YEAR
 
     // It has || 0 so that if the field is left empty, it defaults to 0
-    const monthlyPayments = monthlyPaymentsElement.valueAsNumber || 0
-    const downPayment = downPaymentElement.valueAsNumber || 0
+    // const monthlyPayments = monthlyPaymentsElement.valueAsNumber || 0
+    // const downPayment = downPaymentElement.valueAsNumber || 0
 
     // calculate the PMT (how much to pay per interval)
     const PMT = formatToTwoDecimals(
       calculatePMT({
-        totalLoan: LOAN_AMOUNT,
-        annualInterestRate: ANNUAL_INTEREST_RATE,
-        totalPeriodYears: YEARS,
-        periodPerYear: PAYMENTS_PER_YEAR,
+        LOAN_AMOUNT,
+        TOTAL_PERIODS,
+        INTEREST_RATE_PER_PERIOD,
       })
     )
 
@@ -52,6 +52,6 @@ export const App = () => {
       PMT,
     })
 
-    // console.table(MORTGAGE_PAYMENTS)
+    console.table(MORTGAGE_PAYMENTS)
   }) // form.submit
 } // App
