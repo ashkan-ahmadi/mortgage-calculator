@@ -4,15 +4,15 @@
   "description": "Calculate your mortgage payments with ease",
   "main": "src/index.js",
   "scripts": {
-    "watch-dev": "webpack --mode development --watch",
-    "build-prod": "webpack --mode production"
+    "start": "webpack --mode development --watch",
+    "build:production": "webpack --mode production"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ashkan-ahmadi/mortgage-calculator.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["mortgage calculator"],
+  "author": "Ashkan Ahmadi",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ashkan-ahmadi/mortgage-calculator/issues"
